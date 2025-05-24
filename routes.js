@@ -1,5 +1,7 @@
 const express = require('express');
 const route = express.Router();
+
+//Objeto utilizado
 const financeiro = [
     {
         descricao: "Bala",
@@ -13,6 +15,7 @@ route.get('/', (req, res) => {
     console.log(financeiro);
 });
 
+//Rota para criação de novos financeiros
 route.post('/criar', (req, res)=>{
     const desc = req.body.descricao;
     const valor = req.body.valor;
