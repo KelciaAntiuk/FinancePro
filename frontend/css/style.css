@@ -69,6 +69,14 @@ body {
     margin-bottom: 10px;
   }
 
+  .item .valor {
+    display: block;
+  font-weight: normal;
+  font-size: 16px;     
+  color: #333;      
+  margin: 2px 0;
+  }
+
   .badge {
     border-radius: 15px;
     padding: 5px 15px;
