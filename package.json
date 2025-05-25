@@ -1,7 +1,6 @@
 {
   "name": "financepro",
   "version": "1.0.0",
-  "description": "",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,5 +23,6 @@
     "express": "^5.1.0",
     "html": "^1.0.0",
     "path": "^0.12.7"
-  }
+  },
+  "description": ""
 }

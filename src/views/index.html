@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestão Financeira</title>
- <link rel="stylesheet" href="/css/style.css">
- <script src="/js/script.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/script.js" defer></script>
 </head>
 <body>
 
@@ -32,30 +32,29 @@
     <button onclick="filterList('entrada')">Entradas</button>
     <button onclick="filterList('saida')">Saídas</button>
   </div>
-  
 
   <div class="list">
-    <div class="item">
+    <div class="item" data-id="1">
       <span>Descrição 1</span>
       <span class="badge entrada">Entrada</span>
       <div class="icon-buttons">
-        <button onclick="openModalEditar()">✏️</button>
+        <button onclick="openModalEditar(1, 'Descrição 1', 1, 100)">✏️</button>
         <button>🗑️</button>
       </div>
     </div>
-    <div class="item">
+    <div class="item" data-id="2">
       <span>Descrição 2</span>
       <span class="badge entrada">Entrada</span>
       <div class="icon-buttons">
-        <button onclick="openModalEditar()">✏️</button>
+        <button onclick="openModalEditar(2, 'Descrição 2', 1, 200)">✏️</button>
         <button>🗑️</button>
       </div>
     </div>
-    <div class="item">
+    <div class="item" data-id="3">
       <span>Descrição 3</span>
       <span class="badge saida">Saída</span>
       <div class="icon-buttons">
-        <button onclick="openModalEditar()">✏️</button>
+        <button onclick="openModalEditar(3, 'Descrição 3', 2, 150)">✏️</button>
         <button>🗑️</button>
       </div>
     </div>
@@ -65,15 +64,16 @@
   <div class="modal" id="modalCriar">
     <div class="modal-content">
       <h2>Adicionar Entrada</h2>
-      <form action="/criar" method="post">
-        <input type="text" name="descricao" placeholder="Descrição">
-        <input type="number" name="valor" placeholder="Valor">
-        <select name="tipo">
+      <form id="formCriar">
+        <input type="text" id="descricao" placeholder="Descrição" required>
+        <input type="number" id="valor" placeholder="Valor" required>
+        <select id="tipo">
           <option value="1">ENTRADA</option>
           <option value="2">SAÍDA</option>
         </select>
         <br><br>
-        <button class="add-button" onclick="closeModalCriar()">Salvar</button>
+        <button class="add-button" type="submit">Salvar</button>
+        <button class="add-button" type="button" onclick="closeModalCriar()">Cancelar</button>
       </form>
     </div>
   </div>
@@ -81,16 +81,17 @@
   <!-- Modal de edição -->
   <div class="modal" id="modalEditar">
     <div class="modal-content">
-      <h2>Adicionar Entrada</h2>
-      <form action="/editar" method="put">
-        <input type="text" placeholder="Descrição">
-        <input type="number" placeholder="Valor">
-        <select>
+      <h2>Editar Item</h2>
+      <form id="formEditar">
+        <input type="text" id="descricaoEditar" placeholder="Descrição" required>
+        <input type="number" id="valorEditar" placeholder="Valor" required>
+        <select id="tipoEditar">
           <option value="1">ENTRADA</option>
           <option value="2">SAÍDA</option>
         </select>
         <br><br>
-        <button class="add-button" onclick="closeModalEditar()">Salvar</button>
+        <button class="add-button" type="submit">Salvar</button>
+        <button class="add-button" type="button" onclick="closeModalEditar()">Cancelar</button>
       </form>
     </div>
   </div>
