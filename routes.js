@@ -35,4 +35,9 @@ route.post('/criar', (req, res)=>{
     res.redirect('/');
 });
 
+//atualizar as entradas e saídas e saldo.
+route.get('/api/financeiro', (req, res) => {
+    res.json(financeiro);
+});
+
 module.exports = route;
