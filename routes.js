@@ -59,7 +59,7 @@ route.put('/editar/:id', (req, res) => {
     }
 });
 
-// Rota para deletar um item (opcional)
+// Rota para deletar um item
 route.delete('/deletar/:id', (req, res) => {
     const { id } = req.params;
     
