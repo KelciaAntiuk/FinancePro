@@ -81,23 +81,29 @@
       </div>
     </div>
 
-    <!-- Modal de edição -->
-    <div class="modal" id="modalEditar">
-      <div class="modal-content">
-        <h2>Adicionar Entrada</h2>
-        <form action="/editar" method="put">
-          <input type="text" placeholder="Descrição">
-          <input type="number" placeholder="Valor">
-          <select>
-            <option value="1">ENTRADA</option>
-            <option value="2">SAÍDA</option>
-          </select>
-          <br><br>
-          <button class="add-button" onclick="closeModalEditar()">Salvar</button>
-        </form>
-      </div>
+  <!-- Modal de edição -->
+  <div class="modal" id="modalEditar">
+    <div class="modal-content">
+      <h2>Adicionar Entrada</h2>
+      <form action="/editar" method="put">
+        <input required type="text" placeholder="Descrição">
+        <input required type="number" placeholder="Valor">
+        <select required>
+          <option value=1>ENTRADA</option>
+          <option value=2>SAÍDA</option>
+        </select>
+        <br><br>
+        <button class="add-button" onclick="closeModalEditar()">Salvar</button>
+      </form>
     </div>
   </div>
+
+  <div class="modal" id="modalErro">
+  <div class="modal-content" style="background: #ff6d6d; color: white;">
+    <h2>Erro</h2>
+    <p id="mensagemErro"></p>
+  </div>
+</div>
 
 </body>
 
