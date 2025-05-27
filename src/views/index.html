@@ -1,99 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestão Financeira</title>
- <link rel="stylesheet" href="/css/style.css">
- <script src="/js/script.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/script.js"></script>
 </head>
+
 <body>
+  <div class="fundo">
 
-  <h1>Gestão Financeira</h1>
+    <h1 style="color: white;">Gestão Financeira</h1>
 
-  <div class="dashboard">
-    <div class="box">
-      <div class="box-header entrada">Entrada</div>
-      <div class="valor">R$ 0,00</div>
-    </div>
-    <div class="box">
-      <div class="box-header saida">Saída</div>
-      <div class="valor">R$ 0,00</div>
-    </div>
-    <div class="box">
-      <div class="box-header saldo">Saldo</div>
-      <div class="valor">R$ 0,00</div>
-    </div>
-  </div>
-
-  <button class="add-button" onclick="openModalCriar()">Adicionar</button>
-  <div class="filters">
-    <button onclick="filterList('todos')">Todos</button>
-    <button onclick="filterList('entrada')">Entradas</button>
-    <button onclick="filterList('saida')">Saídas</button>
-  </div>
-  
-
-  <div class="list">
-    <div class="item">
-      <span>Descrição 1</span>
-      <span class="badge entrada">Entrada</span>
-      <div class="icon-buttons">
-        <button onclick="openModalEditar()">✏️</button>
-        <button>🗑️</button>
+    <div class="dashboard">
+      <div class="box">
+        <div class="box-header entrada">Entrada</div>
+        <div class="valor">R$ 0,00</div>
+      </div>
+      <div class="box">
+        <div class="box-header saida">Saída</div>
+        <div class="valor">R$ 0,00</div>
+      </div>
+      <div class="box">
+        <div class="box-header saldo">Saldo</div>
+        <div class="valor">R$ 0,00</div>
       </div>
     </div>
-    <div class="item">
-      <span>Descrição 2</span>
-      <span class="badge entrada">Entrada</span>
-      <div class="icon-buttons">
-        <button onclick="openModalEditar()">✏️</button>
-        <button>🗑️</button>
+
+    <button class="add-button" onclick="openModalCriar()">Adicionar</button>
+    <div class="filters">
+      <button onclick="filterList('todos')">Todos</button>
+      <button onclick="filterList('entrada')">Entradas</button>
+      <button onclick="filterList('saida')">Saídas</button>
+    </div>
+
+
+    <div class="list">
+      <div class="item">
+        <span>Descrição 1</span>
+        <span class="badge entrada">Entrada</span>
+        <div class="icon-buttons">
+          <button onclick="openModalEditar()">✏️</button>
+          <button>🗑️</button>
+        </div>
+      </div>
+      <div class="item">
+        <span>Descrição 2</span>
+        <span class="badge entrada">Entrada</span>
+        <div class="icon-buttons">
+          <button onclick="openModalEditar()">✏️</button>
+          <button>🗑️</button>
+        </div>
+      </div>
+      <div class="item">
+        <span>Descrição 3</span>
+        <span class="badge saida">Saída</span>
+        <div class="icon-buttons">
+          <button onclick="openModalEditar()">✏️</button>
+          <button>🗑️</button>
+        </div>
       </div>
     </div>
-    <div class="item">
-      <span>Descrição 3</span>
-      <span class="badge saida">Saída</span>
-      <div class="icon-buttons">
-        <button onclick="openModalEditar()">✏️</button>
-        <button>🗑️</button>
+
+    <!-- Modal de criação -->
+    <div class="modal" id="modalCriar">
+      <div class="modal-content">
+        <h2>Adicionar Entrada</h2>
+        <form action="/criar" method="post">
+          <input type="text" name="descricao" placeholder="Descrição">
+          <input type="number" name="valor" placeholder="Valor">
+          <select name="tipo">
+            <option value="1">ENTRADA</option>
+            <option value="2">SAÍDA</option>
+          </select>
+          <br><br>
+          <button class="add-button" onclick="closeModalCriar()">Salvar</button>
+        </form>
       </div>
     </div>
-  </div>
 
-  <!-- Modal de criação -->
-  <div class="modal" id="modalCriar">
-    <div class="modal-content">
-      <h2>Adicionar Entrada</h2>
-      <form action="/criar" method="post">
-        <input type="text" name="descricao" placeholder="Descrição">
-        <input type="number" name="valor" placeholder="Valor">
-        <select name="tipo">
-          <option value="1">ENTRADA</option>
-          <option value="2">SAÍDA</option>
-        </select>
-        <br><br>
-        <button class="add-button" onclick="closeModalCriar()">Salvar</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal de edição -->
-  <div class="modal" id="modalEditar">
-    <div class="modal-content">
-      <h2>Adicionar Entrada</h2>
-      <form action="/editar" method="put">
-        <input type="text" placeholder="Descrição">
-        <input type="number" placeholder="Valor">
-        <select>
-          <option value="1">ENTRADA</option>
-          <option value="2">SAÍDA</option>
-        </select>
-        <br><br>
-        <button class="add-button" onclick="closeModalEditar()">Salvar</button>
-      </form>
+    <!-- Modal de edição -->
+    <div class="modal" id="modalEditar">
+      <div class="modal-content">
+        <h2>Adicionar Entrada</h2>
+        <form action="/editar" method="put">
+          <input type="text" placeholder="Descrição">
+          <input type="number" placeholder="Valor">
+          <select>
+            <option value="1">ENTRADA</option>
+            <option value="2">SAÍDA</option>
+          </select>
+          <br><br>
+          <button class="add-button" onclick="closeModalEditar()">Salvar</button>
+        </form>
+      </div>
     </div>
   </div>
 
 </body>
+
 </html>
