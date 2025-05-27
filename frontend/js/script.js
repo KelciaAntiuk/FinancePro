@@ -12,6 +12,28 @@ function openModalCriar() {
     document.getElementById("modalEditar").style.display = "none";
   }
 
+  function modalError(erros) {
+  const modal = document.getElementById("modalErro");
+  const mensagem = document.getElementById("mensagemErro");
+
+  // Verifica se há erro válido no array
+  if (erros.length > 0 && erros[erros.length - 1].erro) {
+    const textoErro = erros[erros.length - 1].erro;
+    mensagem.textContent = textoErro;
+    modal.style.display = "flex";
+
+    // Fecha o modal após 5 segundos e limpa o erro no backend
+    setTimeout(() => {
+      modal.style.display = "none";
+      
+      // Remove o erro do array no servidor
+      fetch('/error/delete', { method: 'DELETE' })
+        .then(() => console.log("Erro removido"))
+        .catch((err) => console.error("Erro ao remover erro:", err));
+      
+    }, 3000);
+  }
+}
   //Atualizar os valores, PARTE DO RIQUE.
   
   /*não é necessário, é só excluir essa função caso queiram.
@@ -47,5 +69,22 @@ function openModalCriar() {
     .catch(error => console.error('Erro ao buscar dados:', error));   
   }
 
+  function error(){
+    fetch('/error')
+    .then(res => res.json())
+    .then(dados => {
+      modalError(dados);
+    });
+  }
+
 //Executa ao carregar a página
-document.addEventListener('DOMContentLoaded', atualizarDashboard);
+document.addEventListener('DOMContentLoaded', () => {
+  atualizarDashboard();
+
+  // Verificar se há erro no carregamento
+  fetch('/error')
+    .then(res => res.json())
+    .then(dados => {
+      modalError(dados);
+    });
+});
