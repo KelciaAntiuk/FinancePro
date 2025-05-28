@@ -11,11 +11,12 @@ const financeiro = [
     }
 ];
 
-let ultimoId = 2;
+const error = [{}]
+
+let ultimoId = 1;
 
 route.get('/', (req, res) => {
-    res.render('index', { financeiro }); // Passando o array financeiro para o template
-    console.log(financeiro);
+    res.render('index');
 });
 
 //Rota para criação de novos financeiros
@@ -23,16 +24,44 @@ route.post('/criar', (req, res) => {
     const desc = req.body.descricao;
     const valor = req.body.valor;
     const tipo = req.body.tipo;
+
     ultimoId++;
 
-    financeiro.push({
-        descricao: desc,
-        valor: parseFloat(valor),
-        tipo: parseInt(tipo),
-        id: ultimoId
-    });
+    const validation = !desc || isNaN(valor) || [1, 2].includes(tipo);
 
-    res.redirect('/');
+    if (validation) {
+        error.push({
+            erro: "Algo deu errado"
+        })
+        res.redirect('/');
+    }
+    else{
+        financeiro.push({
+            desc,
+            valor: parseFloat(valor),
+            tipo: parseInt(tipo),
+            id: ultimoId
+        });
+
+        res.redirect('/');
+    }
+});
+
+//atualizar as entradas e saídas e saldo.
+route.get('/api/financeiro', (req, res) => {
+    res.json(financeiro);
+});
+
+//Retornar mensagem de erro
+route.get('/error', (req, res) => {
+    res.status(400).json(error);
+});
+
+route.delete('/error/delete', (req, res) => {
+    if (error.length > 0) {
+        error.pop(); // remove o último erro
+    }
+    res.sendStatus(200);
 });
 
 // Rota para edição de um item financeiro
