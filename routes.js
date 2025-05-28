@@ -90,12 +90,19 @@ route.put('/editar/:id', (req, res) => {
 
 // Rota para deletar um item
 route.delete('/deletar/:id', (req, res) => {
-    const { id } = req.params;
-    
-    // Filtrando o item do array
-    financeiro = financeiro.filter(i => i.id != id);
+    const id = parseInt(req.params.id);
+    const index = financeiro.findIndex(item => item.id === id);
 
-    res.status(200).json({ message: 'Item deletado com sucesso!' });
+    if (index !== -1) {
+        financeiro.splice(index, 1);
+        res.sendStatus(200);
+    } else {
+        error.push({ erro: "Item não encontrado para deletar" });
+        res.status(404).json({ erro: "Item não encontrado" });
+    }
 });
 
+
+
 module.exports = route;
+
