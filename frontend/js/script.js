@@ -309,3 +309,22 @@ document.addEventListener("DOMContentLoaded", () => {
       modalError(dados);
     });
 });
+
+//delete leticia
+function deletarItem(id){
+  fetch(`/deletar/${id}`, {
+    method: 'DELETE'
+  })
+    .then((response) => {
+      if (response.ok) {
+        window.location.reload(); 
+      } else {
+        error(); 
+      }
+    })
+    .catch(() => {
+      error(); 
+    });
+
+}
+  
