@@ -311,6 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //delete leticia
+function deletarItem(id){
   fetch(`/deletar/${id}`, {
     method: 'DELETE'
   })
@@ -324,3 +325,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(() => {
       error(); 
     });
+
+}
+  
