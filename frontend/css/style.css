@@ -62,6 +62,21 @@ h1 {
   background: #a09191;
 }
 
+.item .valor {
+  display: block;
+  font-weight: normal;
+  font-size: 16px;
+  color: #333;
+  margin: 2px 0;
+}
+
+.badge {
+  border-radius: 15px;
+  padding: 5px 15px;
+  font-weight: bold;
+  color: #000;
+}
+
 .valor {
   font-size: 1.6em;
   font-weight: bold;
@@ -211,6 +226,7 @@ h1 {
   background-color: #e0e0e0;
   margin-left: 4%
 }
+
 .filter-button-todos:hover {
   background: #056180;
   color: white;
@@ -221,6 +237,7 @@ h1 {
   color: #2e7d32;
   border: 1px solid #81c784;
 }
+
 .filter-button-entrada:hover {
   background: #056180;
   color: white;
@@ -231,6 +248,7 @@ h1 {
   color: #c62828;
   border: 1px solid #ef9a9a;
 }
+
 .filter-button-saida:hover {
   background: #056180;
   color: white;

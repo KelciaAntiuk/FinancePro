@@ -20,7 +20,7 @@ route.get('/', (req, res) => {
 });
 
 //Rota para criação de novos financeiros
-route.post('/criar', (req, res)=>{
+route.post('/criar', (req, res) => {
     const desc = req.body.descricao;
     const valor = req.body.valor;
     const tipo = req.body.tipo;
@@ -62,6 +62,40 @@ route.delete('/error/delete', (req, res) => {
         error.pop(); // remove o último erro
     }
     res.sendStatus(200);
+});
+
+// Rota para edição de um item financeiro
+route.put('/editar/:id', (req, res) => {
+    const { id } = req.params; // ID do item a ser editado
+    const { descricao, valor, tipo } = req.body; // Dados enviados no corpo da requisição
+
+    console.log('Requisição recebida:', { id, descricao, valor, tipo });
+
+    // Encontrar o item pelo ID
+    const item = financeiro.find(i => i.id == id);
+
+    if (item) {
+        // Atualizar os dados do item
+        item.descricao = descricao;
+        item.valor = parseFloat(valor);
+        item.tipo = parseInt(tipo);
+
+        // Retornar sucesso
+        res.status(200).json({ message: 'Item editado com sucesso!', item });
+    } else {
+        // Caso o item não seja encontrado
+        res.status(404).json({ message: 'Item não encontrado!' });
+    }
+});
+
+// Rota para deletar um item
+route.delete('/deletar/:id', (req, res) => {
+    const { id } = req.params;
+    
+    // Filtrando o item do array
+    financeiro = financeiro.filter(i => i.id != id);
+
+    res.status(200).json({ message: 'Item deletado com sucesso!' });
 });
 
 module.exports = route;
