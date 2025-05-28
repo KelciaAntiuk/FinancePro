@@ -28,11 +28,15 @@
     </div>
   </div>
 
-  <button class="add-button" onclick="openModalCriar()">Adicionar</button>
   <div class="filters">
-    <button onclick="filterList('todos')">Todos</button>
-    <button onclick="filterList('entrada')">Entradas</button>
-    <button onclick="filterList('saida')">Saídas</button>
+    <div class="filterBotoesEsquerda">
+      <button class="filter-button-todos" onclick="filterList('todos')">Todos</button>
+      <button class="filter-button-entrada" onclick="filterList('entrada')">Entradas</button>
+      <button class="filter-button-saida" onclick="filterList('saida')">Saídas</button>
+    </div>
+    <div class="filterBotaoAdd">
+      <button class="add-button" onclick="openModalCriar()">Adicionar</button>
+    </div>
   </div>
 
   <div class="list"></div>
