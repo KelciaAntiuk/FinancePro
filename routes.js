@@ -4,7 +4,7 @@ const route = express.Router();
 //Objeto utilizado
 const financeiro = [
     {
-        descricao: "Bala",
+        descricao: "Teste",
         valor: 1.00,
         tipo: 2,
         id: 1
@@ -21,13 +21,13 @@ route.get('/', (req, res) => {
 
 //Rota para criação de novos financeiros
 route.post('/criar', (req, res) => {
-    const desc = req.body.descricao;
+    const descricao = req.body.descricao;
     const valor = req.body.valor;
     const tipo = req.body.tipo;
 
     ultimoId++;
 
-    const validation = !desc || isNaN(valor) || [1, 2].includes(tipo);
+    const validation = !descricao || isNaN(valor) || [1, 2].includes(tipo);
 
     if (validation) {
         error.push({
@@ -37,7 +37,7 @@ route.post('/criar', (req, res) => {
     }
     else{
         financeiro.push({
-            desc,
+            descricao,
             valor: parseFloat(valor),
             tipo: parseInt(tipo),
             id: ultimoId
@@ -61,7 +61,7 @@ route.delete('/error/delete', (req, res) => {
     if (error.length > 0) {
         error.pop(); // remove o último erro
     }
-    res.sendStatus(200);
+    res.redirect('/error');
 });
 
 // Rota para edição de um item financeiro
