@@ -88,3 +88,107 @@ document.addEventListener('DOMContentLoaded', () => {
       modalError(dados);
     });
 });
+
+
+
+
+//Enrique
+
+//aparece quando carrega
+function carregarLista() {
+  fetch('/api/financeiro')
+    .then(res => res.json())
+    .then(dados => {
+      const lista = document.querySelector('.list');
+      lista.innerHTML = ''; 
+
+      dados.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+
+        const spanDescricao = document.createElement('span');
+        spanDescricao.textContent = item.descricao;
+
+        const spanBadge = document.createElement('span');
+        spanBadge.className = 'badge ' + (item.tipo == 1 ? 'entrada' : 'saida');
+        spanBadge.textContent = item.tipo == 1 ? 'Entrada' : 'Saída';
+
+        const divButtons = document.createElement('div');
+        divButtons.className = 'icon-buttons';
+
+        const btnEditar = document.createElement('button');
+        btnEditar.textContent = '✏️';
+        btnEditar.onclick = () => openModalEditar(item);
+
+        const btnExcluir = document.createElement('button');
+        btnExcluir.textContent = '🗑️';
+        btnExcluir.onclick = () => deletarItem(item.id);
+
+        divButtons.appendChild(btnEditar);
+        divButtons.appendChild(btnExcluir);
+
+        div.appendChild(spanDescricao);
+        div.appendChild(spanBadge);
+        div.appendChild(divButtons);
+
+        lista.appendChild(div);
+      });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  atualizarDashboard();
+  carregarLista(); 
+
+  fetch('/error')
+    .then(res => res.json())
+    .then(dados => {
+      modalError(dados);
+    });
+});
+
+//filtro
+
+function filterList(tipo) {
+  fetch('/api/financeiro')
+    .then(res => res.json())
+    .then(dados => {
+      const lista = document.querySelector('.list');
+      lista.innerHTML = '';
+
+      const filtrados = tipo === 'todos' ? dados : dados.filter(item => {
+        if (tipo === 'entrada') return item.tipo == 1;
+        if (tipo === 'saida') return item.tipo == 2;
+      });
+
+      filtrados.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+
+        const spanDescricao = document.createElement('span');
+        spanDescricao.textContent = item.descricao;
+
+        const spanBadge = document.createElement('span');
+        spanBadge.className = 'badge ' + (item.tipo == 1 ? 'entrada' : 'saida');
+        spanBadge.textContent = item.tipo == 1 ? 'Entrada' : 'Saída';
+
+        const divButtons = document.createElement('div');
+        divButtons.className = 'icon-buttons';
+
+        const btnEditar = document.createElement('button');
+        btnEditar.textContent = '✏️';
+        btnEditar.onclick = () => openModalEditar(item);
+
+        const btnExcluir = document.createElement('button');
+        btnExcluir.textContent = '🗑️';
+        btnExcluir.onclick = () => deletarItem(item.id);
+
+        divButtons.appendChild(btnEditar);
+        divButtons.appendChild(btnExcluir);
+        div.appendChild(spanDescricao);
+        div.appendChild(spanBadge);
+        div.appendChild(divButtons);
+        lista.appendChild(div);
+      });
+    });
+}
