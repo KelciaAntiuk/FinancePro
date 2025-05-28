@@ -31,9 +31,9 @@
 
     <button class="add-button" onclick="openModalCriar()">Adicionar</button>
     <div class="filters">
-      <button onclick="filterList('todos')">Todos</button>
-      <button onclick="filterList('entrada')">Entradas</button>
-      <button onclick="filterList('saida')">Saídas</button>
+      <button class="filter-button-todos" onclick="filterList('todos')">Todos</button>
+      <button class="filter-button-entrada" onclick="filterList('entrada')">Entradas</button>
+      <button class="filter-button-saida" onclick="filterList('saida')">Saídas</button>
     </div>
 
 
@@ -67,7 +67,13 @@
     <!-- Modal de criação -->
     <div class="modal" id="modalCriar">
       <div class="modal-content">
-        <h2>Adicionar Entrada</h2>
+        <h2 
+          style="
+            display: flex; 
+            justify-content: center;"
+        >
+          Adicionar Entrada
+        </h2>
         <form action="/criar" method="post">
           <input type="text" name="descricao" placeholder="Descrição">
           <input type="number" name="valor" placeholder="Valor">
@@ -81,29 +87,35 @@
       </div>
     </div>
 
-  <!-- Modal de edição -->
-  <div class="modal" id="modalEditar">
-    <div class="modal-content">
-      <h2>Adicionar Entrada</h2>
-      <form action="/editar" method="put">
-        <input required type="text" placeholder="Descrição">
-        <input required type="number" placeholder="Valor">
-        <select required>
-          <option value=1>ENTRADA</option>
-          <option value=2>SAÍDA</option>
-        </select>
-        <br><br>
-        <button class="add-button" onclick="closeModalEditar()">Salvar</button>
-      </form>
+    <!-- Modal de edição -->
+    <div class="modal" id="modalEditar">
+      <div class="modal-content">
+        <h2
+        style="
+        display: flex; 
+        justify-content: center;"
+        >
+        Adicionar Entrada
+      </h2>
+        <form action="/editar" method="put">
+          <input required type="text" placeholder="Descrição">
+          <input required type="number" placeholder="Valor">
+          <select required>
+            <option value=1>ENTRADA</option>
+            <option value=2>SAÍDA</option>
+          </select>
+          <br><br>
+          <button class="add-button" onclick="closeModalEditar()">Salvar</button>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <div class="modal" id="modalErro">
-  <div class="modal-content" style="background: #ff6d6d; color: white;">
-    <h2>Erro</h2>
-    <p id="mensagemErro"></p>
-  </div>
-</div>
+    <div class="modal" id="modalErro">
+      <div class="modal-content" style="background: #ff6d6d; color: white;">
+        <h2>Erro</h2>
+        <p id="mensagemErro"></p>
+      </div>
+    </div>
 
 </body>
 
